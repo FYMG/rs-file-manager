@@ -1,0 +1,30 @@
+import { commands } from '../../../utils/consts.js';
+import { t } from '../../../utils/loc/index.js';
+import up from '../../commands/navigation/up.js';
+
+class CommandExecutor {
+  /**
+   * @param {string} currentDir
+   * @param {Interface} rlInterface
+   */
+  constructor(currentDir, rlInterface) {
+    this.rlInterface = rlInterface;
+    this.currentDir = currentDir;
+  }
+
+  async execute(command, args) {
+    switch (command.toLowerCase()) {
+      case commands.exit:
+        this.rlInterface.close();
+        break;
+      case commands.up:
+        this.currentDir = await up(this.currentDir);
+        break;
+      default:
+        console.log(t('unknown-command'));
+        break;
+    }
+  }
+}
+
+export default CommandExecutor;

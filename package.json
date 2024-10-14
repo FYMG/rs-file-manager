@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/FYMG/rs-file-manager/issues"
   },
+  "type": "module",
   "homepage": "https://github.com/FYMG/rs-file-manager#readme"
 }
