@@ -8,6 +8,7 @@ import cat from '../../commands/fs/cat.js';
 import rn from '../../commands/fs/rn.js';
 import cp from '../../commands/fs/cp.js';
 import mv from '../../commands/fs/mv.js';
+import rm from '../../commands/fs/rm.js';
 
 class CommandExecutor {
   /**
@@ -78,6 +79,14 @@ class CommandExecutor {
           break;
         }
         await mv(this.currentDir, args[0], args[1]);
+        break;
+
+      case commands.rm:
+        if (!args[0]) {
+          console.error(t('error-args-missing'));
+          break;
+        }
+        await rm(this.currentDir, args[0]);
         break;
 
       default:
