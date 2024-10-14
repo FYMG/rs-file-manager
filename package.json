@@ -1,0 +1,19 @@
+{
+  "name": "rs-file-manager",
+  "version": "1.0.0",
+  "description": "File Manager using Node.js APIs.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FYMG/rs-file-manager.git"
+  },
+  "author": "FYMG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FYMG/rs-file-manager/issues"
+  },
+  "homepage": "https://github.com/FYMG/rs-file-manager#readme"
+}
