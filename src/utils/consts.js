@@ -8,6 +8,7 @@ const commands = {
   add: 'add',
   cat: 'cat',
   rn: 'rn',
+  cp: 'cp',
 };
 
 export { userNameKey, commands };
