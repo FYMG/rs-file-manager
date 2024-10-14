@@ -1,5 +1,5 @@
 import * as readline from 'node:readline';
-import CommandExecutor from '../command-executor/CommandExecutor.js';
+import CommandExecutor from '../command-executor/command-executor.js';
 import * as os from 'node:os';
 import exit from '../../commands/navigation/exit.js';
 import getUserName from '../../../utils/helpers/getUserName.js';

@@ -9,6 +9,7 @@ import rn from '../../commands/fs/rn.js';
 import cp from '../../commands/fs/cp.js';
 import mv from '../../commands/fs/mv.js';
 import rm from '../../commands/fs/rm.js';
+import systemInfo from '../../commands/os/systemInfo.js';
 
 class CommandExecutor {
   /**
@@ -87,6 +88,14 @@ class CommandExecutor {
           break;
         }
         await rm(this.currentDir, args[0]);
+        break;
+
+      case commands.os:
+        if (!args[0]) {
+          console.error(t('error-args-missing'));
+          break;
+        }
+        systemInfo(args[0]);
         break;
 
       default:
