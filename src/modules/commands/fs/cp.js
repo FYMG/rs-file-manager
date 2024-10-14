@@ -15,8 +15,8 @@ async function cp(currentDir, fileName, newName) {
     await new Promise((resolve, reject) => {
       readableStream.pipe(writableStream).on('finish', resolve).on('error', reject);
     }).finally(() => {
-      readableStream.close();
-      writableStream.close();
+      readableStream.destroy();
+      writableStream.destroy();
     });
   } catch (err) {
     console.error(`${t('something-wrong')}: ${err?.message ?? err}`);

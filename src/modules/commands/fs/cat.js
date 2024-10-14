@@ -18,7 +18,7 @@ async function cat(currentDir, fileName) {
         .on('end', resolve)
         .on('error', reject);
     }).finally(() => {
-      readableStream.close();
+      readableStream.destroy();
     });
   } catch (err) {
     console.error(`${t('something-wrong')}: ${err?.message ?? err}`);

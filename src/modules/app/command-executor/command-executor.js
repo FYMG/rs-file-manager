@@ -10,6 +10,7 @@ import cp from '../../commands/fs/cp.js';
 import mv from '../../commands/fs/mv.js';
 import rm from '../../commands/fs/rm.js';
 import systemInfo from '../../commands/os/systemInfo.js';
+import hash from '../../commands/hash/hash.js';
 
 class CommandExecutor {
   #commands = {
@@ -69,6 +70,11 @@ class CommandExecutor {
       args: 1,
       currentDirNeeded: false,
       fn: systemInfo,
+    },
+    [commands.hash]: {
+      args: 1,
+      currentDirNeeded: true,
+      fn: hash,
     },
   };
 
