@@ -1,11 +1,11 @@
 import * as fs from 'node:fs/promises';
 import { t } from '../../../utils/loc/index.js';
-import path from 'path';
 import throwErrorWhenFileExist from '../../../utils/helpers/throwErrorWhenFileExist.js';
+import getFullPath from '../../../utils/helpers/getFullPath.js';
 
 async function add(currentDir, fileName) {
   try {
-    const filePath = path.join(path.resolve(currentDir), fileName);
+    const filePath = getFullPath(currentDir, fileName);
     await throwErrorWhenFileExist(filePath);
     await fs.writeFile(filePath, '', {
       encoding: 'utf8',

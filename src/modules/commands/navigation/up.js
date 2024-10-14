@@ -3,12 +3,11 @@ import { t } from '../../../utils/loc/index.js';
 import throwErrorWhenFileNeverExist from '../../../utils/helpers/throwErrorWhenFileNeverExist.js';
 
 async function up(currentDir) {
-  const from = path.resolve(currentDir);
-  const to = path.dirname(from);
-
-  if (from === to) return currentDir;
-
   try {
+    const from = path.resolve(currentDir);
+    const to = path.dirname(from);
+
+    if (from === to) return currentDir;
     await throwErrorWhenFileNeverExist(to);
     return to;
   } catch (err) {
