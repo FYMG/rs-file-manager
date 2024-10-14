@@ -1,6 +1,7 @@
 import { commands } from '../../../utils/consts.js';
 import { t } from '../../../utils/loc/index.js';
 import up from '../../commands/navigation/up.js';
+import cd from '../../commands/navigation/cd.js';
 
 class CommandExecutor {
   /**
@@ -20,6 +21,12 @@ class CommandExecutor {
       case commands.up:
         this.currentDir = await up(this.currentDir);
         break;
+
+      case commands.cd:
+        if (!args[0]) console.log(t('error-args-missing'));
+        this.currentDir = await cd(this.currentDir, args[0]);
+        break;
+
       default:
         console.log(t('unknown-command'));
         break;

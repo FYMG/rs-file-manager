@@ -32,8 +32,9 @@ function start() {
       .trim()
       .split(' ')
       .filter((arg) => arg !== '');
+    const result = await executor.execute(command, args);
     showCurrentDir();
-    await executor.execute(command, args);
+    if (result) console.log(result);
   });
   rl.on('close', () => {
     exit(rl);
