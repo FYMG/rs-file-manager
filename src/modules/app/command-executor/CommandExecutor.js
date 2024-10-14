@@ -3,6 +3,7 @@ import { t } from '../../../utils/loc/index.js';
 import up from '../../commands/navigation/up.js';
 import cd from '../../commands/navigation/cd.js';
 import ls from '../../commands/navigation/ls.js';
+import add from '../../commands/fs/add.js';
 
 class CommandExecutor {
   /**
@@ -25,7 +26,7 @@ class CommandExecutor {
 
       case commands.cd:
         if (!args[0]) {
-          console.log(t('error-args-missing'));
+          console.error(t('error-args-missing'));
           break;
         }
         this.currentDir = await cd(this.currentDir, args[0]);
@@ -35,8 +36,16 @@ class CommandExecutor {
         await ls(this.currentDir);
         break;
 
+      case commands.add:
+        if (!args[0]) {
+          console.error(t('error-args-missing'));
+          break;
+        }
+        await add(this.currentDir, args[0]);
+        break;
+
       default:
-        console.log(t('unknown-command'));
+        console.error(t('unknown-command'));
         break;
     }
   }
