@@ -1,5 +1,6 @@
 import * as fs from 'node:fs/promises';
 import { t } from '../../../utils/loc/index.js';
+import logError from '../../../utils/helpers/logError.js';
 
 async function ls(currentDir) {
   try {
@@ -11,7 +12,7 @@ async function ls(currentDir) {
 
     console.table(tableData);
   } catch (err) {
-    console.error(`${t('something-wrong')}: ${err?.message ?? err}`);
+    logError(err);
   }
 }
 

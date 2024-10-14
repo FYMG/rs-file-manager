@@ -3,6 +3,7 @@ import { t } from '../../../utils/loc/index.js';
 import throwErrorWhenFileNeverExist from '../../../utils/helpers/throwErrorWhenFileNeverExist.js';
 import fs from 'node:fs';
 import HashTransform from '../../../utils/helpers/hashTransform.js';
+import logError from '../../../utils/helpers/logError.js';
 
 async function hash(currentDir, fileName) {
   try {
@@ -23,7 +24,7 @@ async function hash(currentDir, fileName) {
         });
     }).finally(() => readStream.destroy());
   } catch (err) {
-    console.error(`${t('something-wrong')}: ${err?.message ?? err}`);
+    logError(err);
   }
 }
 

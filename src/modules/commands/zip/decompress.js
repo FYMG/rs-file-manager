@@ -5,6 +5,9 @@ import fs from 'node:fs';
 import zlib from 'node:zlib';
 import { t } from '../../../utils/loc/index.js';
 import { pipeline } from 'node:stream/promises';
+import { colors } from '../../../utils/consts.js';
+import getColoredString from '../../../utils/helpers/getColoredString.js';
+import logError from '../../../utils/helpers/logError.js';
 
 async function decompress(currentDir, fileName, newName) {
   try {
@@ -16,8 +19,9 @@ async function decompress(currentDir, fileName, newName) {
     const readStream = fs.createReadStream(src);
     const writeStream = fs.createWriteStream(dest);
     await pipeline(readStream, zlib.createBrotliDecompress(), writeStream);
+    console.log(getColoredString(t('decompress-success', { path: dest }), colors.green));
   } catch (err) {
-    console.error(`${t('something-wrong')}: ${err?.message ?? err}`);
+    logError(err);
   }
 }
 

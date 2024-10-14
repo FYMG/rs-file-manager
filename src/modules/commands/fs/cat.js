@@ -2,6 +2,7 @@ import * as fs from 'node:fs';
 import { t } from '../../../utils/loc/index.js';
 import throwErrorWhenFileNeverExist from '../../../utils/helpers/throwErrorWhenFileNeverExist.js';
 import getFullPath from '../../../utils/helpers/getFullPath.js';
+import logError from '../../../utils/helpers/logError.js';
 
 async function cat(currentDir, fileName) {
   try {
@@ -21,7 +22,7 @@ async function cat(currentDir, fileName) {
       readableStream.destroy();
     });
   } catch (err) {
-    console.error(`${t('something-wrong')}: ${err?.message ?? err}`);
+    logError(err);
   }
 }
 

@@ -15,6 +15,14 @@ const loc = {
   'os-cpus-model': 'Model',
   'os-cpus-clock-rate': 'Clock Rate (GHz)',
   'os-arch': 'Current system architecture: {{arch}}',
+  'add-success': 'File added successfully path: {{path}}',
+  'rm-success': 'File removed successfully path: {{path}}',
+  'rn-success': 'File renamed successfully from: {{src}} to: {{dest}}',
+  'cp-success': 'File copied successfully from: {{src}} to: {{dest}}',
+  'mv-success': 'File moved successfully from: {{src}} to: {{dest}}',
+  'compress-success': 'File compressed successfully path to compressed file: {{path}}',
+  'decompress-success':
+    'File compressed successfully path to decompressed file: {{path}}',
   'error-unknown-command': 'Unknown command: {{command}}',
   'error-unknown-os-arg':
     'Unknown OS argument "{{arg}}". Available: --EOL, --username, --homedir, --cpus, --architecture',

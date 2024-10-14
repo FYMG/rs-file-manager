@@ -15,7 +15,6 @@ async function cd(currentDir, targetDir) {
     await throwErrorWhenFileNeverExist(to);
     return to;
   } catch (err) {
-    console.error(`${t('something-wrong')}: ${err?.message ?? err}`);
     return currentDir;
   }
 }

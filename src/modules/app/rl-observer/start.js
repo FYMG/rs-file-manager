@@ -4,27 +4,31 @@ import * as os from 'node:os';
 import getUserName from '../../../utils/helpers/getUserName.js';
 import { t } from '../../../utils/loc/index.js';
 import { colors } from '../../../utils/consts.js';
+import getColoredString from '../../../utils/helpers/getColoredString.js';
 
 function start() {
   const username = getUserName();
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: `${colors.cyan}>${colors.reset} `,
+    prompt: getColoredString('> ', colors.cyan),
   });
   const executor = new CommandExecutor(os.homedir(), rl);
 
   const showCurrentDir = () => {
     rl.prompt();
     console.log(
-      `${colors.cyan}${t('current-directory', { dir: executor.currentDir })}${colors.reset}`
+      getColoredString(t('current-directory', { dir: executor.currentDir }), colors.cyan)
     );
   };
 
   console.log(
-    `${colors.green}${t('welcome-message', {
-      username,
-    })}${colors.reset}`
+    getColoredString(
+      t('welcome-message', {
+        username,
+      }),
+      colors.magenta
+    )
   );
   showCurrentDir();
 
@@ -37,7 +41,7 @@ function start() {
     showCurrentDir();
   });
   rl.on('close', () => {
-    console.log(`${colors.magenta}${t('exit-message', { username })}${colors.reset}`);
+    console.log(getColoredString(t('exit-message', { username }), colors.magenta));
     process.exit(0);
   });
 }
