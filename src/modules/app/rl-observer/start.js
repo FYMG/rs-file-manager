@@ -1,29 +1,30 @@
 import * as readline from 'node:readline';
 import CommandExecutor from '../command-executor/command-executor.js';
 import * as os from 'node:os';
-import exit from '../../commands/navigation/exit.js';
 import getUserName from '../../../utils/helpers/getUserName.js';
 import { t } from '../../../utils/loc/index.js';
+import { colors } from '../../../utils/consts.js';
 
 function start() {
+  const username = getUserName();
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
+    prompt: `${colors.cyan}>${colors.reset} `,
   });
   const executor = new CommandExecutor(os.homedir(), rl);
 
   const showCurrentDir = () => {
+    rl.prompt();
     console.log(
-      t('current-directory', {
-        dir: executor.currentDir,
-      })
+      `${colors.cyan}${t('current-directory', { dir: executor.currentDir })}${colors.reset}`
     );
   };
 
   console.log(
-    t('welcome-message', {
-      username: getUserName(),
-    })
+    `${colors.green}${t('welcome-message', {
+      username,
+    })}${colors.reset}`
   );
   showCurrentDir();
 
@@ -36,7 +37,8 @@ function start() {
     showCurrentDir();
   });
   rl.on('close', () => {
-    exit(rl);
+    console.log(`${colors.magenta}${t('exit-message', { username })}${colors.reset}`);
+    process.exit(0);
   });
 }
 

@@ -11,9 +11,11 @@ import mv from '../../commands/fs/mv.js';
 import rm from '../../commands/fs/rm.js';
 import systemInfo from '../../commands/os/systemInfo.js';
 import hash from '../../commands/hash/hash.js';
+import decompress from '../../commands/zip/decompress.js';
+import compress from '../../commands/zip/compress.js';
 
 class CommandExecutor {
-  #commands = {
+  #commands = Object.freeze({
     [commands.exit]: {
       args: 0,
       currentDirNeeded: false,
@@ -24,12 +26,13 @@ class CommandExecutor {
     [commands.up]: {
       args: 0,
       currentDirNeeded: true,
-      fn: up,
+      fn: async (currentDir) => (this.currentDir = await up(currentDir)),
     },
     [commands.cd]: {
       args: 1,
       currentDirNeeded: true,
-      fn: cd,
+      fn: async (currentDir, ...args) =>
+        (this.currentDir = await cd(currentDir, ...args)),
     },
     [commands.ls]: {
       args: 0,
@@ -76,7 +79,18 @@ class CommandExecutor {
       currentDirNeeded: true,
       fn: hash,
     },
-  };
+
+    [commands.decompress]: {
+      args: 2,
+      currentDirNeeded: true,
+      fn: decompress,
+    },
+    [commands.compress]: {
+      args: 2,
+      currentDirNeeded: true,
+      fn: compress,
+    },
+  });
 
   /**
    * @param {string} currentDir
@@ -87,13 +101,22 @@ class CommandExecutor {
     this.currentDir = currentDir;
   }
 
+  /**
+   * @param {string} command
+   * @param {string[]} args
+   * @returns {Promise<void>}
+   */
   async execute(command, args) {
     const loweredCommand = command.toLowerCase();
     if (loweredCommand in this.#commands) {
       const { args: expectedArgs, currentDirNeeded, fn } = this.#commands[loweredCommand];
       if (args.length !== expectedArgs) {
         console.error(
-          t('error-args-count', { expected: expectedArgs, count: args.length, command })
+          t('error-args-count', {
+            expected: expectedArgs,
+            count: String(args.length),
+            command,
+          })
         );
         return;
       }

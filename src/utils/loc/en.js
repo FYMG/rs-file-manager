@@ -17,10 +17,10 @@ const loc = {
   'os-arch': 'Current system architecture: {{arch}}',
   'error-unknown-command': 'Unknown command: {{command}}',
   'error-unknown-os-arg':
-    'Unknown OS argument: {{arg}}. Available: --eol, --username, --homedir, --cpus, --architecture',
+    'Unknown OS argument "{{arg}}". Available: --EOL, --username, --homedir, --cpus, --architecture',
   'error-folder-path-not-found': 'Folder or file not found',
   'error-args-count':
-    'Wrong number of arguments for command: "{{command}}" expected {{expected}} but got {{count}}',
+    'Wrong number of arguments for command "{{command}}" expected {{expected}} but got {{count}}',
   'error-fs-operation-failed-exists': 'FS operation failed, {{filePath}} already exists',
   'error-fs-operation-failed-never-exist':
     'FS operation failed, {{filePath}} never exists',
