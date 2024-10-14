@@ -3,7 +3,6 @@ const loc = {
   'welcome-message': 'Welcome to the File Manager, {{username}}!',
   'current-directory': 'You are currently in {{dir}}',
   'exit-message': 'Thank you for using File Manager, {{username}}, goodbye!',
-  'unknown-command': 'Unknown command',
   'something-wrong': 'Something went wrong',
   'ls-file': 'File',
   'ls-directory': 'Directory',
@@ -16,10 +15,12 @@ const loc = {
   'os-cpus-model': 'Model',
   'os-cpus-clock-rate': 'Clock Rate (GHz)',
   'os-arch': 'Current system architecture: {{arch}}',
+  'error-unknown-command': 'Unknown command: {{command}}',
   'error-unknown-os-arg':
     'Unknown OS argument: {{arg}}. Available: --eol, --username, --homedir, --cpus, --architecture',
   'error-folder-path-not-found': 'Folder or file not found',
-  'error-args-missing': 'Argument(s) missing',
+  'error-args-count':
+    'Wrong number of arguments for command: "{{command}}" expected {{expected}} but got {{count}}',
   'error-fs-operation-failed-exists': 'FS operation failed, {{filePath}} already exists',
   'error-fs-operation-failed-never-exist':
     'FS operation failed, {{filePath}} never exists',

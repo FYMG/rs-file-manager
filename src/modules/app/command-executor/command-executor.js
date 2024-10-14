@@ -12,6 +12,66 @@ import rm from '../../commands/fs/rm.js';
 import systemInfo from '../../commands/os/systemInfo.js';
 
 class CommandExecutor {
+  #commands = {
+    [commands.exit]: {
+      args: 0,
+      currentDirNeeded: false,
+      fn: () => {
+        this.rlInterface.close();
+      },
+    },
+    [commands.up]: {
+      args: 0,
+      currentDirNeeded: true,
+      fn: up,
+    },
+    [commands.cd]: {
+      args: 1,
+      currentDirNeeded: true,
+      fn: cd,
+    },
+    [commands.ls]: {
+      args: 0,
+      currentDirNeeded: true,
+      fn: ls,
+    },
+    [commands.add]: {
+      args: 1,
+      currentDirNeeded: true,
+      fn: add,
+    },
+    [commands.cat]: {
+      args: 1,
+      currentDirNeeded: true,
+      fn: cat,
+    },
+    [commands.rn]: {
+      args: 2,
+      currentDirNeeded: true,
+      fn: rn,
+    },
+    [commands.cp]: {
+      args: 2,
+      currentDirNeeded: true,
+      fn: cp,
+    },
+    [commands.mv]: {
+      args: 2,
+      currentDirNeeded: true,
+      fn: mv,
+    },
+    [commands.rm]: {
+      args: 1,
+      currentDirNeeded: true,
+      fn: rm,
+    },
+    [commands.os]: {
+      args: 1,
+      currentDirNeeded: false,
+      fn: systemInfo,
+    },
+  };
+
   /**
    * @param {string} currentDir
    * @param {Interface} rlInterface
@@ -22,85 +82,23 @@ class CommandExecutor {
   }
 
   async execute(command, args) {
-    switch (command.toLowerCase()) {
-      case commands.exit:
-        this.rlInterface.close();
-        break;
-      case commands.up:
-        this.currentDir = await up(this.currentDir);
-        break;
+    const loweredCommand = command.toLowerCase();
+    if (loweredCommand in this.#commands) {
+      const { args: expectedArgs, currentDirNeeded, fn } = this.#commands[loweredCommand];
+      if (args.length !== expectedArgs) {
+        console.error(
+          t('error-args-count', { expected: expectedArgs, count: args.length, command })
+        );
+        return;
+      }
 
-      case commands.cd:
-        if (!args[0]) {
-          console.error(t('error-args-missing'));
-          break;
-        }
-        this.currentDir = await cd(this.currentDir, args[0]);
-        break;
-
-      case commands.ls:
-        await ls(this.currentDir);
-        break;
-
-      case commands.add:
-        if (!args[0]) {
-          console.error(t('error-args-missing'));
-          break;
-        }
-        await add(this.currentDir, args[0]);
-        break;
-
-      case commands.cat:
-        if (!args[0]) {
-          console.error(t('error-args-missing'));
-          break;
-        }
-        await cat(this.currentDir, args[0]);
-        break;
-
-      case commands.rn:
-        if (!args[0] || !args[1]) {
-          console.error(t('error-args-missing'));
-          break;
-        }
-        await rn(this.currentDir, args[0], args[1]);
-        break;
-
-      case commands.cp:
-        if (!args[0] || !args[1]) {
-          console.error(t('error-args-missing'));
-          break;
-        }
-        await cp(this.currentDir, args[0], args[1]);
-        break;
-
-      case commands.mv:
-        if (!args[0] || !args[1]) {
-          console.error(t('error-args-missing'));
-          break;
-        }
-        await mv(this.currentDir, args[0], args[1]);
-        break;
-
-      case commands.rm:
-        if (!args[0]) {
-          console.error(t('error-args-missing'));
-          break;
-        }
-        await rm(this.currentDir, args[0]);
-        break;
-
-      case commands.os:
-        if (!args[0]) {
-          console.error(t('error-args-missing'));
-          break;
-        }
-        systemInfo(args[0]);
-        break;
-
-      default:
-        console.error(t('unknown-command'));
-        break;
+      if (currentDirNeeded) {
+        await fn(this.currentDir, ...args);
+      } else {
+        await fn(...args);
+      }
+    } else {
+      console.error(t('error-unknown-command', { command }));
     }
   }
 }
