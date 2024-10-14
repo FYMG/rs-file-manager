@@ -11,8 +11,8 @@ async function up(currentDir) {
   try {
     await throwErrorWhenFileNeverExist(to);
     return to;
-  } catch {
-    console.log(t('something-wrong'));
+  } catch (err) {
+    console.error(`${t('something-wrong')}: ${err?.message ?? err}`);
   }
 
   return currentDir;

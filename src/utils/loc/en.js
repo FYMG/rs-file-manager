@@ -7,6 +7,10 @@ const loc = {
   'something-wrong': 'Something went wrong',
   'error-folder-path-not-found': 'Folder or file not found',
   'error-args-missing': 'Argument(s) missing',
+  'ls-file': 'File',
+  'ls-directory': 'Directory',
+  'ls-type': 'Type',
+  'ls-name': 'Name',
 };
 
 export default loc;

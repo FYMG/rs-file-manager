@@ -17,8 +17,8 @@ async function cd(currentDir, targetDir) {
   try {
     await throwErrorWhenFileNeverExist(to);
     return to;
-  } catch {
-    console.log(t('error-folder-path-not-found'));
+  } catch (err) {
+    console.error(`${t('something-wrong')}: ${err?.message ?? err}`);
     return currentDir;
   }
 }

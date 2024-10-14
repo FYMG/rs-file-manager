@@ -2,6 +2,7 @@ import { commands } from '../../../utils/consts.js';
 import { t } from '../../../utils/loc/index.js';
 import up from '../../commands/navigation/up.js';
 import cd from '../../commands/navigation/cd.js';
+import ls from '../../commands/navigation/ls.js';
 
 class CommandExecutor {
   /**
@@ -23,8 +24,15 @@ class CommandExecutor {
         break;
 
       case commands.cd:
-        if (!args[0]) console.log(t('error-args-missing'));
+        if (!args[0]) {
+          console.log(t('error-args-missing'));
+          break;
+        }
         this.currentDir = await cd(this.currentDir, args[0]);
+        break;
+
+      case commands.ls:
+        await ls(this.currentDir);
         break;
 
       default:
