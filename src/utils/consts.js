@@ -6,6 +6,7 @@ const commands = {
   cd: 'cd',
   ls: 'ls',
   add: 'add',
+  cat: 'cat',
 };
 
 export { userNameKey, commands };

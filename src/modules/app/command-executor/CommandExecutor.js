@@ -4,6 +4,7 @@ import up from '../../commands/navigation/up.js';
 import cd from '../../commands/navigation/cd.js';
 import ls from '../../commands/navigation/ls.js';
 import add from '../../commands/fs/add.js';
+import cat from '../../commands/fs/cat.js';
 
 class CommandExecutor {
   /**
@@ -42,6 +43,14 @@ class CommandExecutor {
           break;
         }
         await add(this.currentDir, args[0]);
+        break;
+
+      case commands.cat:
+        if (!args[0]) {
+          console.error(t('error-args-missing'));
+          break;
+        }
+        await cat(this.currentDir, args[0]);
         break;
 
       default:
