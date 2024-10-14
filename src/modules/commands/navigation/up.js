@@ -1,5 +1,4 @@
 import path from 'path';
-import { t } from '../../../utils/loc/index.js';
 import throwErrorWhenFileNeverExist from '../../../utils/helpers/throwErrorWhenFileNeverExist.js';
 import logError from '../../../utils/helpers/logError.js';
 

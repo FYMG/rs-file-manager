@@ -22,7 +22,7 @@ const loc = {
   'mv-success': 'File moved successfully from: {{src}} to: {{dest}}',
   'compress-success': 'File compressed successfully path to compressed file: {{path}}',
   'decompress-success':
-    'File compressed successfully path to decompressed file: {{path}}',
+    'File decompressed successfully path to decompressed file: {{path}}',
   'error-unknown-command': 'Unknown command: {{command}}',
   'error-unknown-os-arg':
     'Unknown OS argument "{{arg}}". Available: --EOL, --username, --homedir, --cpus, --architecture',

@@ -1,5 +1,4 @@
 import getFullPath from '../../../utils/helpers/getFullPath.js';
-import { t } from '../../../utils/loc/index.js';
 import throwErrorWhenFileNeverExist from '../../../utils/helpers/throwErrorWhenFileNeverExist.js';
 import fs from 'node:fs';
 import HashTransform from '../../../utils/helpers/hashTransform.js';

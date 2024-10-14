@@ -1,6 +1,5 @@
 import path from 'path';
 import throwErrorWhenFileNeverExist from '../../../utils/helpers/throwErrorWhenFileNeverExist.js';
-import { t } from '../../../utils/loc/index.js';
 import getFullPath from '../../../utils/helpers/getFullPath.js';
 
 async function cd(currentDir, targetDir) {
